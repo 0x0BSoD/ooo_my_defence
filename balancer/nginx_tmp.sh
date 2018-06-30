@@ -1,25 +1,53 @@
 hosts=""
 
 for i in $(seq 1 $1); do
-  num=$((10+$i))
-  hosts+="\t\tserver 192.168.$num:3000;\n"
+  hosts+="\t\tserver web$i:3000;\n"
 done
 
 cfg=$(cat << EOF
-http { \n
-\tevents { worker_connections 1024; } \n
-\tupstream localhost { \n
-$hosts
-\t} \n
-\tserver { \n
-\t\tlisten 8080; \n
-\t\tserver_name localhost; \n
-\t\tlocation / { \n
-\t\t\tproxy_pass http://localhost; \n
-\t\t\tproxy_set_header Host $host; \n
-\t\t} \n
-\t} \n
-} \n
+user nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    upstream localhost {
+       $hosts
+    }
+
+    server {
+    listen 80;
+    server_name localhost;
+    location / {
+       proxy_pass http://localhost;
+       proxy_set_header Host $host;
+    }
+  }
+
+}
+
 EOF
 )
 

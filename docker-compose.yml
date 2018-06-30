@@ -17,12 +17,28 @@ services:
       MYSQL_PASSWORD: 123456
     ports:
       - "3306:3306"
-  web:
+
+  web1:
     depends_on:
       - db
     links:
       - db:db
     build: back/.
     restart: always
-    ports:
-      - "8080:80"
+
+  web2:
+    depends_on:
+      - db
+    links:
+      - db:db
+    build: back/.
+    restart: always
+
+  loadbalancer:
+      build: ./balancer
+      tty: true
+      links:
+          - web1
+          - web2
+      ports:
+          - '80:80'

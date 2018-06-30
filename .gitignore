@@ -2,3 +2,4 @@ tags
 *.retry
 .vagrant
 base/data/
+.DS_Store

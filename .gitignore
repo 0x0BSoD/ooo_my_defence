@@ -1,0 +1,4 @@
+tags
+*.retry
+.vagrant
+base/data/

@@ -1,0 +1,8 @@
+[databases]
+base ansible_host=192.168.10.2 ansible_user=vagrant
+
+[front]
+balancer ansible_host=192.168.10.3 ansible_user=vagrant
+
+[back]
+back ansible_host=192.168.10.10 ansible_user=vagrant

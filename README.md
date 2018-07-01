@@ -2,4 +2,4 @@
 
 - make clean - destroy vagrant env
 - make init - init vagrant env
-- make inst=NUM_OF_CLIENT_INSTANCES deploy - deploy ons server from hosts file
+- make inst=NUM_OF_CLIENT_INSTANCES deploy - deploy on server from hosts file

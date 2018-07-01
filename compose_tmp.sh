@@ -1,4 +1,18 @@
+hosts=""
 
+for i in $(seq 1 $1); do
+  hosts+="
+  web$i:
+    depends_on:
+      - db
+    links:
+      - db:db
+    image: zlodey23/test_web
+    restart: always
+"
+done
+
+cfg="
 version: '3.3'
 services:
   db:
@@ -15,41 +29,9 @@ services:
       MYSQL_USER: base_viewer
       MYSQL_PASSWORD: 123456
     ports:
-      - 3306:3306
+      - "3306:3306"
 
-  
-  web1:
-    depends_on:
-      - db
-    links:
-      - db:db
-    image: zlodey23/test_web
-    restart: always
-
-  web2:
-    depends_on:
-      - db
-    links:
-      - db:db
-    image: zlodey23/test_web
-    restart: always
-
-  web3:
-    depends_on:
-      - db
-    links:
-      - db:db
-    image: zlodey23/test_web
-    restart: always
-
-  web4:
-    depends_on:
-      - db
-    links:
-      - db:db
-    image: zlodey23/test_web
-    restart: always
-
+  $hosts
 
   loadbalancer:
       build: ./balancer
@@ -59,4 +41,6 @@ services:
           - web2
       ports:
           - '80:80'
+"
 
+echo "$cfg" > docker-compose.yml

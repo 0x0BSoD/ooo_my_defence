@@ -1,7 +1,7 @@
 hosts=""
 
 for i in $(seq 1 $1); do
-  hosts+="\t\tserver web$i:3000;\n"
+  hosts+="        server web$i:80;\n"
 done
 
 cfg=$(cat << EOF
@@ -20,9 +20,9 @@ http {
     include       /etc/nginx/mime.types;
     default_type  application/octet-stream;
 
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
+    log_format  main  '\$remote_addr - \$remote_user [\$time_local] "\$request" '
+                      '\$status \$body_bytes_sent "\$http_referer" '
+                      '"\$http_user_agent" "\$http_x_forwarded_for"';
 
     access_log  /var/log/nginx/access.log  main;
 
@@ -34,7 +34,7 @@ http {
     #gzip  on;
 
     upstream localhost {
-       $hosts
+$hosts
     }
 
     server {
@@ -42,7 +42,7 @@ http {
     server_name localhost;
     location / {
        proxy_pass http://localhost;
-       proxy_set_header Host $host;
+       proxy_set_header Host \$host;
     }
   }
 
@@ -51,4 +51,4 @@ http {
 EOF
 )
 
-echo $cfg > balancer/nginx.conf
+echo "$cfg" > balancer/nginx.conf

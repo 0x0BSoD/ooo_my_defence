@@ -1,6 +1,6 @@
 tags
 *.retry
 .vagrant
-base/data/
+test_php/base/data/
 .DS_Store
 *.log

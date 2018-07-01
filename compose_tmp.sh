@@ -1,4 +1,5 @@
 hosts=""
+host=""
 
 for i in $(seq 1 $1); do
   hosts+="
@@ -12,8 +13,12 @@ for i in $(seq 1 $1); do
 "
 done
 
+for i in $(seq 1 $1); do
+  host+="        - web$i\n"
+done
+
 cfg="
-version: '3.3'
+version: '2'
 services:
   db:
     build:
@@ -37,10 +42,9 @@ services:
       build: ./balancer
       tty: true
       links:
-          - web1
-          - web2
+$host
       ports:
           - '80:80'
 "
 
-echo "$cfg" > docker-compose.yml
+echo "$cfg" > test_php/docker-compose.yml

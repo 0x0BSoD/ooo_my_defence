@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
         backend.vm.define "backend"
         backend.vm.provider :virtualbox do |vb|
             vb.name = "backend"
-            vb.memory = 512
+            vb.memory = 2048
         end
         id_rsa_pub = File.read("#{Dir.home}/.ssh/id_rsa.pub")
         config.vm.provision "copy ssh public key", type: "shell",
@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
         backend.vm.provision "shell", inline: <<-SHELL
             apt update
             apt full-upgrade -y
-            apt install python
+            apt install python -y
         SHELL
     end
 end

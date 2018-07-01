@@ -51,4 +51,4 @@ $hosts
 EOF
 )
 
-echo "$cfg" > balancer/nginx.conf
+echo "$cfg" > test_php/balancer/nginx.conf

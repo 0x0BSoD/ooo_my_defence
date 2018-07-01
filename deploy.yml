@@ -1,0 +1,12 @@
+- hosts: test_deploy
+  become: yes
+  tasks:
+    - name: copy project folder
+      synchronize:
+        src: test_php/
+        dest: /srv/data
+
+    - name: start project
+      shell: docker-compose up -d
+      args:
+        chdir: /srv/data

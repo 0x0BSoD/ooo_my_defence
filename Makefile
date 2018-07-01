@@ -1,5 +1,7 @@
 hello:
-		@echo "Use make inst=NUM_OF_CLIENT_INSTANCES deploy"
+		@echo "make clean - destroy vagrant env"
+		@echo "make init - init vagrant env"
+		@echo "make inst=NUM_OF_CLIENT_INSTANCES deploy"
 
 clean:
 		vagrant destroy

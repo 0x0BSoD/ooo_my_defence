@@ -26,12 +26,39 @@ services:
     image: zlodey23/test_web
     restart: always
 
+  web2:
+    depends_on:
+      - db
+    links:
+      - db:db
+    image: zlodey23/test_web
+    restart: always
+
+  web3:
+    depends_on:
+      - db
+    links:
+      - db:db
+    image: zlodey23/test_web
+    restart: always
+
+  web4:
+    depends_on:
+      - db
+    links:
+      - db:db
+    image: zlodey23/test_web
+    restart: always
+
 
   loadbalancer:
       build: ./balancer
       tty: true
       links:
         - web1
+        - web2
+        - web3
+        - web4
 
       ports:
           - '80:80'

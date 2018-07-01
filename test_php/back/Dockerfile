@@ -14,6 +14,11 @@ ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
 
+ENV PHP_DB_HOST db
+ENV PHP_DB_BASE test_db
+ENV PHP_DB_USER base_viewer
+ENV PHP_DB_PASS 123456
+
 EXPOSE 80
 
 ADD www /var/www/site

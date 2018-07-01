@@ -3,3 +3,4 @@ tags
 .vagrant
 base/data/
 .DS_Store
+*.log

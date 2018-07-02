@@ -6,10 +6,10 @@ $str1 = "null";
 $str2 = "null";
 $result = "No data";
 
-$mysqli = new mysqli($_ENV["PHP_DB_HOST"],
-                     $_ENV["PHP_DB_USER"],
-                     $_ENV["PHP_DB_PASS"],
-                     $_ENV["PHP_DB_BASE"]);
+$mysqli = new mysqli("db",
+                     "base_viewer",
+                     "123456",
+                     "test_db");
 
 if ($mysqli->connect_errno) {
     $error = "Не удалось подключиться к MySQL: ($mysqli->connect_errno) $mysqli->connect_error";

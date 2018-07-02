@@ -47,4 +47,4 @@ $host
           - '80:80'
 "
 
-echo "$cfg" > test_php/docker-compose.yml
+echo -e "$cfg" > test_php/docker-compose.yml

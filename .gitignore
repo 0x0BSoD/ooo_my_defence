@@ -4,3 +4,6 @@ tags
 test_php/base/data/
 .DS_Store
 *.log
+test_php/balancer/nginx.conf
+test_php/docker-compose.yml
+

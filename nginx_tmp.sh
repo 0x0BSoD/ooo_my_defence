@@ -1,10 +1,11 @@
+#!/bin/bash
 hosts=""
 
 for i in $(seq 1 $1); do
-  hosts+="        server web$i:80;\n"
+  hosts+="        server web$i:80; \n"
 done
 
-cfg=$(cat << EOF
+cfg="
 user nginx;
 worker_processes  1;
 
@@ -46,9 +47,6 @@ $hosts
     }
   }
 
-}
+}"
 
-EOF
-)
-
-echo "$cfg" > test_php/balancer/nginx.conf
+echo -e "$cfg" > test_php/balancer/nginx.conf

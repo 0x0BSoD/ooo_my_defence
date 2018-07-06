@@ -13,6 +13,7 @@ init:
 
 deploy:
 		@echo "Instances $(inst)"
+		rm -R ./test_php/base/data
 		mkdir ./test_php/base/data
 		chmod +x nginx_tmp.sh
 		chmod +x compose_tmp.sh

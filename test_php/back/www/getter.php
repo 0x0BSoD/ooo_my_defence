@@ -6,13 +6,14 @@ $str1 = "null";
 $str2 = "null";
 $result = "No data";
 
-$mysqli = new mysqli("db",
-                     "base_viewer",
-                     "123456",
-                     "test_db");
+$mysqli = new mysqli(getenv("PHP_HOST"),
+                     getenv("PHP_USER"),
+                     getenv("PHP_PASS"),
+                     getenv("PHP_DB"));
 
 if ($mysqli->connect_errno) {
     $error = "Не удалось подключиться к MySQL: ($mysqli->connect_errno) $mysqli->connect_error";
+    exit;
 } else {
   $state = "connected";
 }

@@ -2,7 +2,7 @@
 hosts=""
 
 for i in $(seq 1 $1); do
-  hosts+="        server web$i:80; \n"
+  hosts+="        server web$i:80;\n"
 done
 
 cfg="

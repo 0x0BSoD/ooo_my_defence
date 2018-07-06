@@ -1,2 +1,2 @@
 [test_deploy]
-node1 ansible_host=192.168.10.10 ansible_user=vagrant
+node1 ansible_host=192.168.98.10 ansible_user=vagrant

@@ -3,7 +3,7 @@
 Vagrant.configure("2") do |config|
     config.vm.define "backend" do |backend|
         backend.vm.box = "ubuntu/xenial64"
-        backend.vm.network "private_network", ip: "192.168.10.10"
+        backend.vm.network "private_network", ip: "192.168.98.10"
         backend.vm.hostname = "backend"
         backend.vm.define "backend"
         backend.vm.provider :virtualbox do |vb|

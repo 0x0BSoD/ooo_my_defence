@@ -39,12 +39,17 @@ services:
   $hosts
 
   loadbalancer:
-      build: ./balancer
-      tty: true
+      image: nginx:stable
+      volumes:
+        - ./balancer/nginx.conf:/etc/nginx/nginx.conf
       links:
 $host
       ports:
           - '80:80'
+      environment:
+      - NGINX_HOST=test-php.com
+      - NGINX_PORT=80
+      command: /bin/bash -c \"exec nginx -g 'daemon off;'\"
 "
 
 echo -e "$cfg" > test_php/docker-compose.yml
